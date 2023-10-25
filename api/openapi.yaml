@@ -1,0 +1,170 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: it@vilabs.eu
+  description: This is a sample openApi document
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://wabli.netlify.app/
+  title: TempApi
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- description: okthess-community-6014
+  url: https://83.212.100.226:6014/v1
+security:
+- {}
+tags:
+- description: not yet ready
+  name: title
+paths:
+  /title:
+    post:
+      operationId: createtitle
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/title'
+        description: data to be created
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/title'
+          description: successful operation
+      summary: Creates the data
+      tags:
+      - title
+      x-eov-operation-handler: controllers/TitleController
+  /title/{titleId}:
+    delete:
+      operationId: deletetitle
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: titleId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: successful operation
+      summary: Delete the element
+      tags:
+      - title
+      x-eov-operation-handler: controllers/TitleController
+    get:
+      operationId: gettitle
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: titleId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/title'
+          description: successful operation
+      summary: Get the element
+      tags:
+      - title
+      x-eov-operation-handler: controllers/TitleController
+    put:
+      operationId: updatetitle
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: titleId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/title'
+        description: data to be updated
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/title'
+          description: successful operation
+      summary: Updates the element
+      tags:
+      - title
+      x-eov-operation-handler: controllers/TitleController
+  /title/getAll:
+    get:
+      operationId: getAlltitle
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/title'
+                type: array
+          description: successful operation
+      summary: Get all the data
+      tags:
+      - title
+      x-method-getAll: "true"
+      x-eov-operation-handler: controllers/TitleController
+  /title/getByParams:
+    get:
+      operationId: getByParamstitle
+      parameters:
+      - description: the query based on which the search is performed
+        explode: true
+        in: query
+        name: filter
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/title'
+                type: array
+          description: successful operation
+      summary: Get all the data based on user query
+      tags:
+      - title
+      x-method-get-by-params: "true"
+      x-eov-operation-handler: controllers/TitleController
+components:
+  schemas:
+    title:
+      example:
+        _id: _id
+        title: title
+      properties:
+        _id:
+          type: string
+        title:
+          type: string
+      required:
+      - title
+      type: object
